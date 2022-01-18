@@ -25,13 +25,20 @@ export async function getImage(id) {
   return result;
 }
 
-export async function addImage(filePath, descriptioin) {
-  let query = `INSERT INTO images (file_path, description) VALUES(?, ?)`;
+export async function addImage(imagePath, detail) {
+  let query = `INSERT INTO images (imagePath, detail) VALUES(?, ?)`;
 
-  const [result] = await pool.query(query, [filePath, descriptioin]);
+  const [result] = await pool.query(query, [imagePath, detail]);
   const id = result.insertId;
-
+  console.log("🔅 Data added in Database");
   return await getImage(id);
+}
+
+export async function deleteImage(id) {
+  const query = `DELETE FROM images WHERE id = ?`;
+  await pool.query(query, [id]);
+
+  return getImages();
 }
 
 // export async function deleteImage()
