@@ -20,12 +20,16 @@
   },
   "homepage": "https://github.com/byu1kim/aws-day-3#readme",
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.259.0",
+    "@aws-sdk/s3-request-presigner": "^3.259.0",
+    "crypto": "^1.0.1",
     "dotenv": "^16.0.3",
     "ejs": "^3.1.8",
     "express": "^4.18.2",
     "fs": "^0.0.1-security",
     "multer": "^1.4.5-lts.1",
-    "mysql2": "^3.0.1"
+    "mysql2": "^3.0.1",
+    "sharp": "^0.31.3"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"

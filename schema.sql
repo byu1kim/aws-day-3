@@ -14,3 +14,6 @@ CREATE TABLE images (
   detail VARCHAR(255) NOT NULL,
   created TIMESTAMP NOT NULL DEFAULT NOW()
 );
+
+
+
