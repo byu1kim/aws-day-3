@@ -35,7 +35,7 @@ app.post("/api/images", upload.single("image"), async (req, res) => {
 
   const detail = req.body.text;
   const fileBuffer = await sharp(req.file.buffer)
-    .resize({ height: 800, width: 800, fit: "contain" })
+    .resize({ height: 800, width: 800, fit: "fill" })
     .toBuffer();
   const imagePath = generateFileName();
   const mimetype = req.file.mimetype;
