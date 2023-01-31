@@ -45,6 +45,7 @@ app.post("/api/images", upload.single("image"), async (req, res) => {
 
   // Database
   const result = await db.addImage(imagePath, detail);
+  result.imageURL = await s3.signedUrl(result.imagePath);
 
   res.status(201).send(result);
 });
