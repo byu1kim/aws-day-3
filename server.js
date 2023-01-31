@@ -34,7 +34,9 @@ app.post("/api/images", upload.single("image"), async (req, res) => {
   console.log("✨ Form data received from Frontend");
 
   const detail = req.body.text;
-  const fileBuffer = req.file.buffer;
+  const fileBuffer = await sharp(req.file.buffer)
+    .resize({ height: 800, width: 800, fit: "contain" })
+    .toBuffer();
   const imagePath = generateFileName();
   const mimetype = req.file.mimetype;
 
