@@ -56,6 +56,10 @@ app.post("/api/images/delete/:id", async (req, res) => {
   const image = await db.getImage(id);
   await s3.deleteImage(image.imagePath);
   const result = await db.deleteImage(id);
+
+  for (const image of result) {
+    image.imageURL = await s3.signedUrl(image.imagePath);
+  }
   res.send(result);
 });
 
