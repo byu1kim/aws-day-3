@@ -37,7 +37,7 @@ export async function addImage(imagePath, detail) {
 export async function deleteImage(id) {
   const query = `DELETE FROM images WHERE id = ?`;
   await pool.query(query, [id]);
-
+  console.log("🔅 Data deleted from Database");
   return getImages();
 }
 

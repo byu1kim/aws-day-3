@@ -40,13 +40,16 @@ export async function uploadImage(imageName, imageBuffer, mimetype) {
 }
 
 export async function deleteImage(imageName) {
+  console.log("S3 Delete?");
   const params = {
     Bucket: bucketName,
     Key: imageName,
   };
+  console.log(imageName);
 
   const command = new DeleteObjectCommand(params);
   const data = await s3Client.send(command);
+  console.log(data);
 
   return data;
 }
@@ -56,7 +59,6 @@ export async function signedUrl(fileName) {
     Bucket: bucketName,
     Key: fileName,
   });
-
   const signedUrl = await getSignedUrl(s3Client, command, {
     expiresIn: 60 * 60 * 24,
   });

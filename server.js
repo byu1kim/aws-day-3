@@ -16,8 +16,7 @@ const upload = multer({ storage: storage });
 app.use(express.static("build"));
 
 // Generate random name for the image file name
-const generateFileName = (bytes = 32) =>
-  crypto.randomBytes(bytes).toString("hex");
+const generateFileName = (bytes = 32) => crypto.randomBytes(bytes).toString("hex");
 
 // images GET
 app.get("/api/images", async (req, res) => {
@@ -34,9 +33,7 @@ app.post("/api/images", upload.single("image"), async (req, res) => {
   console.log("✨ Form data received from Frontend");
 
   const detail = req.body.text;
-  const fileBuffer = await sharp(req.file.buffer)
-    .resize({ height: 800, width: 800, fit: "fill" })
-    .toBuffer();
+  const fileBuffer = await sharp(req.file.buffer).resize({ height: 800, width: 800, fit: "fill" }).toBuffer();
   const imagePath = generateFileName();
   const mimetype = req.file.mimetype;
 
@@ -52,8 +49,11 @@ app.post("/api/images", upload.single("image"), async (req, res) => {
 
 // delete POST
 app.post("/api/images/delete/:id", async (req, res) => {
+  console.log("DELETE!");
   const id = req.params.id;
   const image = await db.getImage(id);
+
+  console.log("Image Deleting...");
   await s3.deleteImage(image.imagePath);
   const result = await db.deleteImage(id);
 
